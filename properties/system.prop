@@ -2,7 +2,7 @@
 
 # Basic system info
 ro.product.model=PKR110
-ro.product.device=PKR110
+ro.product.device=OP60EBL1
 ro.product.name=PKR110
 ro.product.manufacturer=OnePlus
 ro.product.brand=OnePlus

@@ -14,6 +14,9 @@ TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 
+# System SDK version (Android 16)
+BOARD_SYSTEMSDK_VERSIONS := 36
+
 # Kernel
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
@@ -35,6 +38,10 @@ BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
+
+# Recovery image configuration
+BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
+BOARD_RAMDISK_USE_LZ4 := true
 
 # Prebuilt
 BOARD_INCLUDE_RECOVERY_DTBO := true
@@ -119,8 +126,20 @@ TW_NO_SCREEN_BLANK := true
 TW_NO_BATT_PERCENT := false
 TW_HAS_EDL_MODE := true
 TW_SUPPORT_INPUT_AIDL_HAL := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_Y_OFFSET := 100
 TW_H_OFFSET := -100
+
+# Brightness settings (from device)
+TW_BRIGHTNESS_PATH := /sys/devices/platform/soc/ae00000.qcom,mdss_mdp/backlight/panel0-backlight/brightness
+TW_MAX_BRIGHTNESS := 4094
+TW_DEFAULT_BRIGHTNESS := 800
+
+# CPU temperature for recovery display (from device thermal zones)
+TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone1/temp
+
+# Display refresh rate
+TW_FRAMERATE := 120
 
 # Debug
 TWRP_EVENT_LOGGING := true
@@ -148,5 +167,24 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 PLATFORM_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
 TW_USE_FSCRYPT_POLICY := 2
+
+# Vendor kernel modules for recovery
+TW_LOAD_VENDOR_MODULES := \
+    dwc3-msm \
+    i2c-msm-geni \
+    msm_drm \
+    msm_geni_serial \
+    msm_kgsl \
+    phy-msm-ssusb-qmp \
+    qcom_ice \
+    ufs_qcom \
+    ufshcd-crypto-qti
+
+TW_LOAD_PREBUILT_MODULES := true
+
+# Recovery library source files
+RECOVERY_LIBRARY_SOURCE_FILES += \
+    $(PRODUCT_OUT)/system/lib64/android.hardware.health@2.1-impl.recovery.so:$(TARGET_COPY_OUT_SYSTEM_EXT)/lib64/ \
+    $(PRODUCT_OUT)/system/lib64/android.hardware.keymaster@4.1-service-qti.so:$(TARGET_COPY_OUT_SYSTEM_EXT)/lib64/
 
 # OF_* flags moved to fox_PKR110.mk

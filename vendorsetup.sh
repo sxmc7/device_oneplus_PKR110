@@ -1,5 +1,34 @@
+#
+#	This file is part of the OrangeFox Recovery Project
+# 	Copyright (C) 2026 The OrangeFox Recovery Project
+#
+#	OrangeFox is free software: you can redistribute it and/or modify
+#	it under the terms of the GNU General Public License as published by
+#	the Free Software Foundation, either version 3 of the License, or
+#	any later version.
+#
+#	OrangeFox is distributed in the hope that it will be useful,
+#	but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	GNU General Public License for more details.
+#
+# 	This software is released under GPL version 3 or any later version.
+#	See <http://www.gnu.org/licenses/>.
+#
+# 	Please maintain this if you use this script or any part of it
+#
+
+#
+# Build log
+echo "OrangeFox build and vendor setup for OnePlus PKR110 (Ace 5 Pro)"
+echo "Custom Device Tree for OrangeFox Recovery Project"
+echo "Maintainer: iFlow CLI"
+echo "Device: PKR110"
+echo "Product Name: OP60EBL1"
+echo "Fingerprint: OnePlus/PKR110/OP60EBL1:16/BP2A.250605.015/1775721942795:user/release-keys"
+
 FDEVICE="PKR110"
-# 强制设置 FOX_BUILD_DEVICE，确保条件成立
+# Force FOX_BUILD_DEVICE to ensure conditions are met
 FOX_BUILD_DEVICE="$FDEVICE"
 
 fox_get_target_device() {
@@ -61,7 +90,15 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export OF_NO_SPLASH_CHANGE=1
     export OF_PATCH_VBMETA_FLAG=2
 
-    # 注册 lunch combo，供后续手动调用 lunch
+    # Standard FOX runtime variables
+    export FOX_VANILLA_BUILD=1
+    export FOX_DELETE_INITD_ADDON=1
+    export FOX_SETTINGS_ROOT_DIRECTORY="/persist/OFRP"
+    export FOX_VIRTUAL_AB_DEVICE=1
+    export FOX_DELETE_AROMAFM=1
+    export FOX_ENABLE_APP_MANAGER=1
+
+    # Register lunch combos
     add_lunch_combo twrp_PKR110-eng
     add_lunch_combo omni_PKR110-eng
 fi

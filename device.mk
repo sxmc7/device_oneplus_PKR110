@@ -14,6 +14,9 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # 注意：已移除 vendor/omni/config/common.mk 的引用，因为 OrangeFox 构建环境中没有该文件
 
@@ -28,6 +31,7 @@ PRODUCT_RELEASE_NAME := PKR110
 # A/B support
 AB_OTA_UPDATER := true
 AB_OTA_PARTITIONS := system vendor product system_ext vendor_dlkm system_dlkm boot vbmeta_system vbmeta_vendor vbmeta dtbo
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # VNDK version
 PRODUCT_SHIPPING_API_LEVEL := 35
@@ -137,6 +141,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.2-impl-qti \
     android.hardware.boot@1.2-impl-qti.recovery
+
+# A/B OTA packages
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_engine_client \
+    update_verifier \
+    bootctl \
+    qcom_decrypt \
+    qcom_decrypt_fbe
+
+# A/B OTA postinstall configuration
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_system=true \
+    POSTINSTALL_PATH_system=system/bin/otapreopt_script \
+    FILESYSTEM_TYPE_system=ext4 \
+    POSTINSTALL_OPTIONAL_system=true
 
 # Dumpstate HAL
 PRODUCT_PACKAGES += \

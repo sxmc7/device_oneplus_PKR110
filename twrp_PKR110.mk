@@ -26,11 +26,11 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 
-# Inherit from device.mk
-$(call inherit-product, device/oneplus/PKR110/device.mk)
+# Inherit from device.mk (using PRODUCT_RELEASE_NAME variable)
+$(call inherit-product, device/oneplus/$(PRODUCT_RELEASE_NAME)/device.mk)
 
 # Inherit any OrangeFox-specific settings
-$(call inherit-product-if-exists, device/oneplus/PKR110/fox_PKR110.mk)
+$(call inherit-product-if-exists, device/oneplus/$(PRODUCT_RELEASE_NAME)/fox_PKR110.mk)
 
 # Inherit from TWRP-common stuff
 $(call inherit-product-if-exists, vendor/twrp/config/common.mk)

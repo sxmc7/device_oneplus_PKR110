@@ -56,3 +56,7 @@ ro.hardware=qcom
 persist.vendor.fingerprint.fp_id=G_OPTICAL_JV0301
 persist.vendor.fingerprint.optical.support=1
 persist.vendor.fingerprint.sensor_type=optical
+
+# Gatekeeper / USB (recommended for QCOM devices)
+vendor.gatekeeper.disable_spu=true
+vendor.usb.use_ffs_mtp=1

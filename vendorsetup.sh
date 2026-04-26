@@ -61,6 +61,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export OF_NO_SPLASH_CHANGE=1
     export OF_PATCH_VBMETA_FLAG=2
 
-    # 直接调用 lunch，确保产品被注册
-    lunch twrp_PKR110-eng
+    # 注册 lunch combo，供后续手动调用 lunch
+    add_lunch_combo twrp_PKR110-eng
+    add_lunch_combo omni_PKR110-eng
 fi

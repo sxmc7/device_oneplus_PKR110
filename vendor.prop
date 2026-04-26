@@ -1,0 +1,58 @@
+# Vendor properties for OnePlus Ace 5 Pro (PKR110)
+
+# Platform
+ro.board.platform=sun
+ro.board.platform_gpu=adreno
+ro.soc.manufacturer=Qualcomm
+ro.soc.model=SM8750
+
+# Graphics
+ro.hardware.vulkan=1
+ro.opengles.version=196610
+ro.hardware.egl=adreno
+ro.hardware.gralloc=adreno
+
+# QTI vendor
+ro.vendor.qti.va_aosp.support=1
+ro.vendor.qti.va_odm.support=1
+
+# Audio
+ro.vendor.audio.sdk.version=3
+ro.vendor.audio.use.sw.alac.decoder=false
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.spf_restart=true
+
+# Camera
+ro.vendor.camera.extensions.package=org.codeaurora.qcameraextensions
+ro.vendor.camera.extensions.version=1
+
+# Bluetooth
+persist.vendor.bluetooth.host_addon=63
+persist.vendor.bluetooth.modem_nv_support=true
+
+# NFC
+ro.vendor.nfc.support_esim=true
+
+# USB
+persist.vendor.usb.config=adb
+ro.boot.verifiedbootstate=green
+
+# Display
+ro.vendor.display.lcd=1
+ro.vendor.display.type=oled
+
+# Sensors
+ro.vendor.sensors.mag_calibrated=false
+
+# Charger
+ro.vendor.charger.enable_suspend=true
+
+# Boot
+ro.boot.bootloader=sun
+ro.boot.hardware=sun
+ro.hardware=qcom
+
+# Fingerprint
+persist.vendor.fingerprint.fp_id=G_OPTICAL_JV0301
+persist.vendor.fingerprint.optical.support=1
+persist.vendor.fingerprint.sensor_type=optical

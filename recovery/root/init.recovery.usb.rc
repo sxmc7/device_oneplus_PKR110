@@ -1,0 +1,98 @@
+# Copyright (C) 2011-2024 The Linux Foundation
+#
+# Licensed under the BSD 3-Clause License (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://opensource.org/licenses/BSD-3-Clause
+#
+# Qualcomm recovery USB init script for OnePlus PKR110 (SM8750 / sun)
+#
+
+on early-fs
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/idVendor 2d95
+    write /sys/class/android_usb/android0/idProduct 4ee7
+
+on fs
+    mkdir /config 0770 0 1000
+    mount configfs /config /config none
+    mkdir /config/usb_gadget/g1 0770 0 1000
+    mkdir /config/usb_gadget/g1/strings/0x409 0770 0 1000
+    write /config/usb_gadget/g1/strings/0x409/serialnumber 0123456789ABCDEF
+    write /config/usb_gadget/g1/strings/0x409/manufacturer OnePlus
+    write /config/usb_gadget/g1/strings/0x409/product PKR110
+    mkdir /config/usb_gadget/g1/configs/b.1 0770 0 1000
+    mkdir /config/usb_gadget/g1/configs/b.1/strings/0x409 0770 0 1000
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration none
+    mkdir /config/usb_gadget/g1/functions/ffs.adb 0770 0 1000
+    mkdir /config/usb_gadget/g1/functions/ffs.mtp 0770 0 1000
+
+    # UDC controller path for SM8750 (sun)
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+
+on boot
+    write /sys/class/android_usb/android0/enable 0
+
+on property:sys.usb.config=none && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration none
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
+    rm /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    write /config/usb_gadget/g1/configs/b.1/bmAttributes 0x80
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x01
+    write /config/usb_gadget/g1/os_desc/qw_sign MTP
+    mkdir /config/usb_gadget/g1/functions/mtp.gs0 0770 0 1000
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+    setprop sys.usb.state none
+
+on property:sys.usb.config=adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration adb
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    write /config/usb_gadget/g1/configs/b.1/bmAttributes 0x80
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x01
+    write /config/usb_gadget/g1/os_desc/qw_sign ADB
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+    setprop sys.usb.state adb
+
+on property:sys.usb.config=sideload && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration sideload
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    write /config/usb_gadget/g1/configs/b.1/bmAttributes 0x80
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x01
+    write /config/usb_gadget/g1/os_desc/qw_sign SIDELOAD
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+    setprop sys.usb.state sideload
+
+on property:sys.usb.config=mtp && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration mtp
+    symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    write /config/usb_gadget/g1/configs/b.1/bmAttributes 0x80
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x01
+    write /config/usb_gadget/g1/os_desc/qw_sign MTP
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+    setprop sys.usb.state mtp
+
+on property:sys.usb.config=mtp,adb && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration mtp,adb
+    symlink /config/usb_gadget/g1/functions/ffs.mtp /config/usb_gadget/g1/configs/b.1/f1
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f2
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    write /config/usb_gadget/g1/configs/b.1/bmAttributes 0x80
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x01
+    write /config/usb_gadget/g1/os_desc/qw_sign MTP_ADB
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+    setprop sys.usb.state mtp,adb
+
+on property:sys.usb.config=fastboot && property:sys.usb.configfs=1
+    write /config/usb_gadget/g1/configs/b.1/strings/0x409/configuration fastboot
+    symlink /config/usb_gadget/g1/functions/ffs.adb /config/usb_gadget/g1/configs/b.1/f1
+    write /config/usb_gadget/g1/configs/b.1/MaxPower 500
+    write /config/usb_gadget/g1/configs/b.1/bmAttributes 0x80
+    write /config/usb_gadget/g1/os_desc/b_vendor_code 0x01
+    write /config/usb_gadget/g1/os_desc/qw_sign FASTBOOT
+    write /config/usb_gadget/g1/UDC a600000.dwc3
+    setprop sys.usb.state fastboot

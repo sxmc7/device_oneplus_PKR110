@@ -1,0 +1,45 @@
+# System properties for OnePlus Ace 5 Pro (PKR110)
+
+# Basic system info
+ro.product.model=PKR110
+ro.product.device=PKR110
+ro.product.name=PKR110
+ro.product.manufacturer=OnePlus
+ro.product.brand=OnePlus
+
+# Platform
+ro.board.platform=sun
+ro.board.platform_gpu=adreno
+ro.soc.model=SM8750
+
+# Build info
+ro.build.display.id=BP4A.251205.006
+ro.build.version.release=16
+ro.build.version.sdk=36
+ro.build.id=crDroid.PKR110
+ro.build.date.utc=1776144240000
+
+# Security
+ro.boot.verifiedbootstate=green
+ro.build.version.security_patch=2026-03-01
+persist.sys.sf.color_saturation=1.0
+persist.sys.sf.native_mode=0
+
+# Audio
+ro.audio.monitorOrientation=true
+persist.audio.offload.disable=false
+persist.vendor.audio.fluence.voicecall=true
+
+# Recovery
+ro.secure=0
+ro.adb.secure=0
+persist.sys.usb.config=adb
+
+# Display
+ro.sf.lcd_density=560
+ro.sf.lcd_dimensions=2772x1240
+
+# Other
+persist.sys.timezone=Asia/Shanghai
+persist.sys.locale=zh-CN
+keyguard.no_require_sim=true

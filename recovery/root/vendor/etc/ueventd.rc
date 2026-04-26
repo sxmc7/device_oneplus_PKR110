@@ -1,0 +1,181 @@
+# Copyright (C) 2011-2024 The Linux Foundation
+#
+# Licensed under the BSD 3-Clause License (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://opensource.org/licenses/BSD-3-Clause
+#
+# Qualcomm ueventd configuration for OnePlus PKR110 (SM8750 / sun)
+#
+
+# Firmware directories
+firmware_directories /vendor/firmware_mnt/image/
+
+# Subsystems
+subsystem dma_heap
+subsystem mem_buf_vm
+
+# GPU / Adreno
+/dev/kgsl-3d0              0660   root   graphics
+/dev/kgsl-3d1              0660   root   graphics
+/dev/kgsl-3d2              0660   root   graphics
+
+# QSEECOM
+/dev/qseecom               0640   system   system
+/dev/qseecom1              0640   system   system
+
+# QCE for crypto engine
+/dev/qce                   0640   system   system
+/dev/qcrypto               0640   system   system
+/dev/qcedev                0640   system   system
+
+# ION allocation
+/dev/ion                   0666   root   system
+
+# Audio
+/dev/snd/controlC0         0660   root   audio
+/dev/snd/controlC1         0660   root   audio
+/dev/snd/controlC2         0660   root   audio
+/dev/snd/controlC3         0660   root   audio
+/dev/snd/controlC4         0660   root   audio
+/dev/snd/controlC5         0660   root   audio
+/dev/snd/controlC6         0660   root   audio
+/dev/snd/controlC7         0660   root   audio
+/dev/snd/pcmC0D0c          0660   audio   audio
+/dev/snd/pcmC0D0p          0660   audio   audio
+/dev/snd/pcmC0D1c          0660   audio   audio
+/dev/snd/pcmC0D1p          0660   audio   audio
+/dev/snd/pcmC1D0c          0660   audio   audio
+/dev/snd/pcmC1D0p          0660   audio   audio
+/dev/snd/pcmC1D1c          0660   audio   audio
+/dev/snd/pcmC1D1p          0660   audio   audio
+/dev/snd/pcmC2D0c          0660   audio   audio
+/dev/snd/pcmC2D0p          0660   audio   audio
+/dev/snd/pcmC3D0c          0660   audio   audio
+/dev/snd/pcmC3D0p          0660   audio   audio
+/dev/snd/pcmC4D0c          0660   audio   audio
+/dev/snd/pcmC4D0p          0660   audio   audio
+/dev/snd/pcmC5D0c          0660   audio   audio
+/dev/snd/pcmC5D0p          0660   audio   audio
+/dev/snd/pcmC6D0c          0660   audio   audio
+/dev/snd/pcmC6D0p          0660   audio   audio
+/dev/snd/compressC0D0c     0660   audio   audio
+/dev/snd/compressC0D0p     0660   audio   audio
+/dev/snd/compressC1D0c     0660   audio   audio
+/dev/snd/compressC1D0p     0660   audio   audio
+/dev/snd/compressC2D0c     0660   audio   audio
+/dev/snd/compressC2D0p     0660   audio   audio
+/dev/snd/compressC3D0c     0660   audio   audio
+/dev/snd/compressC3D0p     0660   audio   audio
+
+# Sensors
+/dev/sensors                0664   system   system
+/dev/input/*                0660   root     input
+
+# Camera
+/dev/media*                 0660   root     camera
+/dev/video*                 0660   root     camera
+/dev/camreq*                0660   root     camera
+
+# Display
+/dev/dri/*                  0666   root     graphics
+/dev/fb*                    0660   root     graphics
+/dev/graphics/fb*           0660   root     graphics
+/dev/msm_dp*                0660   root     graphics
+/dev/msm_hdmi_*             0660   root     graphics
+/dev/msm_mdp*               0660   root     graphics
+/dev/msm_spctrl             0640   system   system
+
+# Wireless / WLAN
+/dev/wlan                   0660   system   wifi
+/dev/cfg80211               0666   system   wifi
+
+# Bluetooth
+/dev/ttyMSM0                0660   bluetooth bluetooth
+/dev/ttyMSM1                0660   bluetooth bluetooth
+/dev/ttyMSM2                0660   bluetooth bluetooth
+
+# DMA heap
+/dev/dma_heap/*             0666   root     root
+
+# mem_buf
+/dev/mem_buf_vm/*           0666   root     root
+
+# FastRPC / ADSP / CDSP
+/dev/adsprpc-smd            0660   root     system
+/dev/cdsprpc-smd            0660   root     system
+/dev/sdsprpc-smd            0660   root     system
+/dev/adsprpc-smd-secure     0660   root     system
+/dev/cdsprpc-smd-secure     0660   root     system
+/dev/sdsprpc-smd-secure     0660   root     system
+/dev/msm_audio_ion          0666   root     audio
+/dev/spcom                  0660   root     system
+
+# UFS / Storage
+/dev/block/sda*             0660   root     system
+/dev/block/sdb*             0660   root     system
+/dev/block/sdc*             0660   root     system
+/dev/block/sdd*             0660   root     system
+/dev/block/sde*             0660   root     system
+/dev/block/sdf*             0660   root     system
+/dev/block/mmcblk*          0660   root     system
+/dev/block/loop*            0660   root     system
+/dev/block/ram*             0660   root     system
+/dev/block/dm-*             0660   root     system
+/dev/block/zram*            0660   root     system
+/dev/block/vold/*           0660   root     mount
+
+# USB gadget
+/dev/usb/*                  0660   root     usb
+
+# LED
+/dev/leds/*                 0660   system   system
+
+# Vibrator
+/dev/input/*vibrator*       0660   system   input
+
+# TTY
+/dev/ttyGS*                 0660   root     radio
+/dev/ttyHSL*                0660   root     radio
+/dev/tty*                   0660   root     radio
+
+# UIO interfaces
+/dev/uio*                   0660   root     system
+/dev/ubi*                   0660   root     system
+
+# Boot / Misc
+/dev/dload                  0640   root     system
+/dev/rmt_storage            0640   root     system
+/dev/rmnet_ctrl             0640   root     radio
+
+# FRP (Factory Reset Protection)
+/dev/block/platform/*/by-name/frp  0660   root     system
+
+# IPACM
+/dev/ipacm                  0660   root     radio
+/dev/ipa                    0660   root     radio
+
+# QDSS / Trace
+/dev/coresight*             0644   root     system
+/dev/trace_*                0644   root     system
+
+# NPU / Neural Processing
+/dev/npu*                   0660   root     system
+
+# FRP block device (direct)
+/dev/block/by-name/frp      0660   root     system
+
+# ADSP / Modem related
+/dev/msm_sps                0640   root     system
+/dev/subsys_*               0640   root     system
+/dev/mp决策                 0640   root     system
+
+# Thermal
+/dev/thermal*               0644   root     system
+
+# Power supply
+/sys/class/power_supply/*/device/uevent   0660   root    system
+
+# KGSL (GPU)
+/dev/*kgsl*                 0660   root     graphics

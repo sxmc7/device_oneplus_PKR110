@@ -1,0 +1,30 @@
+# Recovery fstab for OnePlus PKR110 (Ace 5 Pro)
+# Platform: Snapdragon 8 Gen 4 (SM8750 / sun)
+
+# Dynamic Partitions
+system          /system         erofs       ro      wait,logical
+system_ext      /system_ext     erofs       ro      wait,logical
+vendor          /vendor         erofs       ro      wait,logical
+product         /product        erofs       ro      wait,logical
+odm             /odm            erofs       ro      wait,logical
+vendor_dlkm     /vendor_dlkm    erofs       ro      wait,logical
+system_dlkm     /system_dlkm    erofs       ro      wait,logical
+
+# Fallback ext4 partitions (if erofs not supported in recovery)
+system          /system         ext4        ro      wait,logical,avb=vbmeta_system
+system_ext      /system_ext     ext4        ro      wait,logical,avb=vbmeta_system
+vendor          /vendor         ext4        ro      wait,logical,avb=vbmeta_system
+product         /product        ext4        ro      wait,logical,avb=vbmeta_system
+odm             /odm            ext4        ro      wait,logical
+
+# Metadata and Data
+/dev/block/by-name/metadata   /metadata   ext4        noatime,nosuid,nodev,discard                                                             wait,check,formattable,first_stage_mount
+/dev/block/by-name/userdata   /data       f2fs        noatime,nosuid,nodev,discard,formattable,noflush_merge,fsync_mode=nobarrier      wait,check,formattable,quota,reservedsize=128m,latemount,resize,fileencryption=aes-256-xts:aes-256-cts:v2+inlinecrypt_optimized,keydirectory=/metadata/vold/metadata_encryption
+
+# Other partitions
+/dev/block/by-name/misc         /misc       emmc        defaults                                                                                 defaults
+
+# Boot partitions (for recovery boot)
+/dev/block/by-name/boot        /boot       emmc        defaults                                                                                 defaults
+/dev/block/by-name/vbmeta      /vbmeta     emmc        defaults                                                                                 defaults
+/dev/block/by-name/init_boot   /init_boot  emmc        defaults                                                                                 defaults

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Recovery VINTF HAL manifest for OnePlus PKR110 (SM8750 / sun)
+     This file declares HAL services available in recovery mode.
+-->
+<manifest version="1.0" type="framework">
+    <!-- Display HAL -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.display.composer-service</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IDisplayComposer</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- Scheduler service -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.servicetracker</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IServiceTracker</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- Sensors HAL -->
+    <hal format="hidl">
+        <name>android.hardware.sensors</name>
+        <transport>hwbinder</transport>
+        <version>2.0</version>
+        <interface>
+            <name>ISensors</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- HIDL Manager -->
+    <hal format="hidl">
+        <name>android.hidl.manager</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IServiceManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- HIDL Memory (ashmem) -->
+    <hal format="hidl">
+        <name>android.hidl.memory</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IMemory</name>
+            <instance>ashmem</instance>
+        </interface>
+    </hal>
+
+    <!-- HIDL Token -->
+    <hal format="hidl">
+        <name>android.hidl.token</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ITokenManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- Netd -->
+    <hal format="hidl">
+        <name>android.system.net.netd</name>
+        <transport>hwbinder</transport>
+        <version>1.1</version>
+        <interface>
+            <name>INetd</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- WiFi Keystore -->
+    <hal format="hidl">
+        <name>android.hardware.wifi.supplicant</name>
+        <transport>hwbinder</transport>
+        <version>1.4</version>
+        <interface>
+            <name>ISupplicant</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- QTI QCC SYS HAL -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.qccsyshal</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IQccSysHal</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- QTI ATCmdFWD -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.atcmdfwd</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IATCmdFwd</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- QTI System Helper -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.systemhelper</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISystemHelper</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+
+    <!-- System SDK versions -->
+    <vendor-ndk>
+        <version>33</version>
+    </vendor-ndk>
+</manifest>
